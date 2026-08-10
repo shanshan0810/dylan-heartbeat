@@ -125,11 +125,8 @@ async function sendPushNotification({ title, body }) {
     icon: process.env.CUSTOM_ICON_URL
   };
 
-  const response = await fetch("https://api.day.app/push", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(barkPayload)
-  });
+  const response = await fetch(http://api.day.app/6DWPAPnrR4onqtvWGQKpa6/${encodeURIComponent(title || "来自Dylan的问候")}/${encodeURIComponent(body ||"我在想你")}
+                              );
 
   const responseText = await response.text();
   let result = {};
