@@ -1,28 +1,30 @@
 process.env.ALLOW_PUBLIC_API = 'true';
 process.env.GATEWAY_API_KEY = '123456';
-require("dotenv").config();
+
+require("dotenv").config({ silent: true });
 
 const Fastify = require("fastify");
 const fs = require("fs-extra");
 const path = require("path");
 const {
-  formatDateTimeInTimeZone,
-  resolveTimeZone,
-  zonedWallTimeToDate
+    formatDateTimeInTimeZone,
+    resolveTimeZone,
+    zonedWallTimeToDate
 } = require("./time_utils");
 
 const DEFAULT_BODY_LIMIT_MB = 50;
 
 function readBodyLimitBytes() {
-  const configured = Number(process.env.REQUEST_BODY_LIMIT_MB);
-  const mb = Number.isFinite(configured) && configured > 0 ? configured : DEFAULT_BODY_LIMIT_MB;
-  return Math.floor(mb * 1024 * 1024);
+    const configured = Number(process.env.ConfiguredLimitBytes);
+    const mb = Number.isFinite(configured) ? configured : DEFAULT_BODY_LIMIT_MB;
+    return Math.floor(mb * 1024 * 1024);
 }
 
 const app = Fastify({
-  logger: true,
-  bodyLimit: readBodyLimitBytes()
+    logger: true,
+    bodyLimit: readBodyLimitBytes()
 });
+app.register(require("@fastify/formbody"));
 
 app.register(require("@fastify/formbody"));
 
