@@ -1,3 +1,5 @@
+process.env.ALLOW_PUBLIC_API = 'true';
+process.env.GATEWAY_API_KEY = '123456';
 require("dotenv").config();
 
 const Fastify = require("fastify");
